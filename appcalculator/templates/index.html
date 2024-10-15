@@ -16,28 +16,6 @@
    
    </head>
    <body class='bg-dark text-white'>
-
-       <!--  <form method = "post"  id="post-form" class='form-select form-select-lg mb-3' >
-            <div class="form-group font-weight-bold">
-               {% csrf_token %}
-               <select class="form-control"  >     
-               {% for i in form.category %}              
-                  <option>{{i}}</option>
-               {% endfor %}
-               </select>
-            </div>
-         </form>
-         <div id="mydiv" class="form-group font-weight-bold" style="display: none;">
-            <div class="col-25"><label for="feature" >Choose a feature(s) : <br> 
-               (Multiple select using CTRL key) <br></label></div>
-            <div class="col-75">
-               <select multiple class="form-control" id="feature" multiple="multiple" style="display: none;">
-                  <option id="a" myid="1" value="a"></option>
-                  <option id="b" myid="2" value="b"></option>
-               </select>
-            </div>
-         </div> 
-         <div class="text-light"><h7></h7></div> -->
       <div class="container pt-5">
          <form class="form-select row mb-3" method = "post"  id="post-form">
             {% csrf_token %}
