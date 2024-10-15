@@ -1,0 +1,14 @@
+
+1) go to project folder using command prompt ( Which contains manage.py file)
+
+2) type the command python manage.py runserver
+
+3) By default you will get a message like 
+
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+4) If thats the case then go to url http://127.0.0.1:8000/
+
+or your default server url/app ( Example : http://"your default url"/ )
+

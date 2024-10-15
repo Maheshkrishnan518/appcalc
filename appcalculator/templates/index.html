@@ -1,0 +1,124 @@
+<!DOCTYPE html>  
+<html lang="en">
+   <head>
+      {% load static %}
+      <meta charset="UTF-8">
+      <title>Index</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+   
+   
+   </head>
+   <body class='bg-dark text-white'>
+
+       <!--  <form method = "post"  id="post-form" class='form-select form-select-lg mb-3' >
+            <div class="form-group font-weight-bold">
+               {% csrf_token %}
+               <select class="form-control"  >     
+               {% for i in form.category %}              
+                  <option>{{i}}</option>
+               {% endfor %}
+               </select>
+            </div>
+         </form>
+         <div id="mydiv" class="form-group font-weight-bold" style="display: none;">
+            <div class="col-25"><label for="feature" >Choose a feature(s) : <br> 
+               (Multiple select using CTRL key) <br></label></div>
+            <div class="col-75">
+               <select multiple class="form-control" id="feature" multiple="multiple" style="display: none;">
+                  <option id="a" myid="1" value="a"></option>
+                  <option id="b" myid="2" value="b"></option>
+               </select>
+            </div>
+         </div> 
+         <div class="text-light"><h7></h7></div> -->
+      <div class="container pt-5">
+         <form class="form-select row mb-3" method = "post"  id="post-form">
+            {% csrf_token %}
+            <div class="col-md-4">
+              <label for="category" class="form-label">Choose a Category</label>
+            </div>
+            <div class="col-md-8">
+               <select class="form-control"  >     
+                  {% for i in form.category %}              
+                     <option>{{i}}</option>
+                  {% endfor %}
+                  </select>
+            </div>          
+          </form>
+         <div class="row mb-3">
+          <div class="col-4" id="mydiv1" style="display: none;">
+            <label for="feature" class="form-label">Choose a feature(s)<br> 
+             (Multiple select using CTRL key)</label>
+          </div>
+          <div class="col-8" id="mydiv2">
+             <select multiple class="form-control" id="feature" multiple="multiple" style="display: none;">
+                <option id="a" myid="1" value="a"></option>
+                <option id="b" myid="2" value="b"></option>
+             </select>
+          </div>
+          <div class="col-12 text-light">
+             <h7 style="color: rgb(0, 255, 106);"></h7>
+          </div>
+         </div>
+      </div>    
+      <script type="text/javascript">
+         $(document).on("change","#post-form",function(e){
+           e.preventDefault()    
+           $('h7').html('');     
+             var category_id= $("select option:selected").val();
+             console.log(category_id);
+             $.ajax({
+               type:'POST',
+               url:'api',
+               data:{
+                 category_id:category_id,
+                 csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
+               },
+               success : function (data){
+                 console.log("success");
+                 
+                 $('#a').html(data[0][0]);
+                 $('#b').html(data[1][0]);   
+                 $('#mydiv1').show();
+                 $('#mydiv2').show();
+                 $('#feature').show();
+
+                $( "#feature" ).on('change',  function() {
+                 
+                 var selected1=[];
+                 var result=[];
+                 $('#feature :selected').each(function(){
+                   selected1[$(this).val()]=$(this).val();
+                 });
+                 const c1=['a','b'];
+                 result =Object.values(selected1)
+                 console.log(typeof(result));
+                 var flag = c1.every(i => result.includes(i))
+                 console.log(flag)
+                 if (selected1['a']==='a'){ 
+                   $('h7').html("Total Application cost = $"+ data[0][1]*10 );
+                 }
+                 if(selected1['b']==='b'){
+                   $('h7').html( "Total Application cost = $"+ data[1][1]*10 );
+                 }
+                 if(flag===true){
+                   $('h7').html("Total Application cost = $"+  (data[0][1]*10 + data[1][1]*10 ));
+                 } 
+                 else{
+                   console.log("error");
+                 }               
+                    
+                 } );
+               } 
+           })
+         }) ;          
+      </script>
+   </body>
+</html>
