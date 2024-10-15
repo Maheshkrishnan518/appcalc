@@ -26,7 +26,7 @@ SECRET_KEY = 'd%e+wrsj#d-vw+l#5r82r0ungi=0*=%7hk7-xx%2*nvn3&&1dx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app','127.0.0.1']
+ALLOWED_HOSTS = ['appcalc.onrender.com','127.0.0.1','localhost']
 
 
 # Application definition
